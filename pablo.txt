@@ -1,0 +1,8 @@
+cargar user
+sms automático
+si se recine el pago se habilita
+reminder
+que el alumno pueda ver un calendario y reservar
+tendto8 (ejemplo)
+
+https://www.dbdesigner.net/designer/schema/226879
