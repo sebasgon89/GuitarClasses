@@ -7,6 +7,7 @@ $resultset = mysqli_query($link, $sqlEvents) or die("database error:". mysqli_er
 $calendar = array();
 while( $rows = mysqli_fetch_assoc($resultset) ) {
 // convert date to milliseconds
+
 $start = strtotime($rows['start_date']) * 1000;
 $end = strtotime($rows['end_date']) * 1000;
 $calendar[] = array(

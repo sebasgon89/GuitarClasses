@@ -5,7 +5,7 @@ events_source: 'event.php',
 view: 'month',
 tmpl_path: 'tmpls/',
 tmpl_cache: false,
-day: '2019-03-01',
+day: '2018-02-28',
 onAfterEventsLoad: function(events) {
 if(!events) {
 return;
