@@ -23,7 +23,7 @@
 $servidor='localhost';
 $usuario='root';
 $pass='';
-$bd='eventos';
+$bd='userstest';
 
 // Nos conectamos a la base de datos
 $conexion = new mysqli($servidor, $usuario, $pass, $bd);	
@@ -37,6 +37,6 @@ if ($conexion->connect_errno) {
 }
 
 // Url donde estara el proyecto, debe terminar con un "/" al final
-$base_url="http://localhost/calendario/";
+$base_url="http://localhost/GuitarClasses/icodeart/";
 
 ?>
