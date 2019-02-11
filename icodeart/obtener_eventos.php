@@ -31,7 +31,6 @@ if ($conexion->query($sql)->num_rows)
 
     // creamos un array
     $datos = array(); 
-
     //guardamos en un array multidimensional todos los datos de la consulta
     $i=0; 
 
