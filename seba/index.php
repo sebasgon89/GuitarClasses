@@ -1,7 +1,7 @@
 <?php
 
 // Timezone
-date_default_timezone_set("America/Buenos Aires");
+date_default_timezone_set("America/Argentina/Buenos_Aires");
 
 // functions file
 include 'functions.php';
@@ -105,11 +105,11 @@ if (isset($_POST['from']))
                 </div><hr>
 
                 <div class="row">
-                        <div id="calendar"></div> <!-- Aqui se mostrara nuestro calendario -->
+                        <div id="calendar"></div> <!-- calendar -->
                         <br><br>
                 </div>
 
-                <!--ventana modal para el calendario-->
+                <!--modal window-->
                 <div class="modal fade" id="events-modal">
                     <div class="modal-dialog">
                             <div class="modal-content">
@@ -117,7 +117,7 @@ if (isset($_POST['from']))
                                         <p>One fine body&hellip;</p>
                                     </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
@@ -128,61 +128,61 @@ if (isset($_POST['from']))
     <script src="<?=$base_url?>js/calendar.js"></script>
     <script type="text/javascript">
         (function($){
-                //creamos la fecha actual
+                //today creation
                 var date = new Date();
                 var yyyy = date.getFullYear().toString();
                 var mm = (date.getMonth()+1).toString().length == 1 ? "0"+(date.getMonth()+1).toString() : (date.getMonth()+1).toString();
                 var dd  = (date.getDate()).toString().length == 1 ? "0"+(date.getDate()).toString() : (date.getDate()).toString();
 
-                //establecemos los valores del calendario
+                //Calendar values
                 var options = {
 
-                    // definimos que los classes se mostraran en ventana modal
+                    // set up modal use for windoe
                         modal: '#events-modal', 
 
-                        // dentro de un iframe
+                        // inside of an iframe
                         modal_type:'iframe',    
 
-                        //obtenemos los classes de la base de datos
-                        events_source: '<?=$base_url?>obtener_classes.php', 
+                        //classes from db
+                        events_source: '<?=$base_url?>get_classes.php', 
 
-                        // mostramos el calendario en el mes
+                        // calendar set as month by default
                         view: 'month',             
 
-                        // y dia actual
+                        // and today
                         day: yyyy+"-"+mm+"-"+dd,   
 
 
-                        // definimos el idioma por defecto
+                        // default language
                         language: 'es-ES', 
 
-                        //Template de nuestro calendario
+                        //calendar temmplate
                         tmpl_path: '<?=$base_url?>tmpls/', 
                         tmpl_cache: false,
 
 
-                        // Hora de inicio
+                        // Time start
                         time_start: '08:00', 
 
-                        // y Hora final de cada dia
+                        // Time end
                         time_end: '22:00',   
 
-                        // intervalo de tiempo entre las hora, en este caso son 30 minutos
+                        // Time split
                         time_split: '30',    
 
-                        // Definimos un ancho del 100% a nuestro calendario
+                        // calendar width
                         width: '100%', 
 
-                        onAfterEventsLoad: function(events)
+                        onAfterEventsLoad: function(classes)
                         {
-                                if(!events)
+                                if(!classes)
                                 {
                                         return;
                                 }
-                                var list = $('#eventlist');
+                                var list = $('#classlist');
                                 list.html('');
 
-                                $.each(events, function(key, val)
+                                $.each(classes, function(key, val)
                                 {
                                         $(document.createElement('li'))
                                                 .html('<a href="' + val.url + '">' + val.title + '</a>')
@@ -203,7 +203,7 @@ if (isset($_POST['from']))
                 };
 
 
-                // id del div donde se mostrara el calendario
+                // id del where the calendar will be shown
                 var calendar = $('#calendar').calendar(options); 
 
                 $('.btn-group button[data-calendar-nav]').each(function()
@@ -234,7 +234,7 @@ if (isset($_POST['from']))
         }(jQuery));
     </script>
 
-<div class="modal fade" id="add_evento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+<div class="modal fade" id="add_class" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -260,11 +260,11 @@ if (isset($_POST['from']))
 
                     <label for="tipo">Tipo de evento</label>
                     <select class="form-control" name="class" id="tipo">
-                        <option value="event-info">Informacion</option>
-                        <option value="event-success">Exito</option>
-                        <option value="event-important">Importantante</option>
-                        <option value="event-warning">Advertencia</option>
-                        <option value="event-special">Especial</option>
+                        <option value="class-info">Informacion</option>
+                        <option value="class-success">Exito</option>
+                        <option value="class-important">Importantante</option>
+                        <option value="class-warning">Advertencia</option>
+                        <option value="class-special">Especial</option>
                     </select>
 
                     <br>
@@ -277,7 +277,7 @@ if (isset($_POST['from']))
 
 
                     <label for="body">Evento</label>
-                    <textarea id="body" name="event" required class="form-control" rows="3"></textarea>
+                    <textarea id="body" name="class" required class="form-control" rows="3"></textarea>
 
     <script type="text/javascript">
         $(function () {
