@@ -99,7 +99,7 @@ if (isset($_POST['from']))
 
                                 </div>
                                     <div class="pull-right form-inline"><br>
-                                        <button class="btn btn-info" data-toggle='modal' data-target='#add_evento'>Añadir Evento</button>
+                                        <button class="btn btn-info" data-toggle='modal' data-target='#add_class'>Añadir Evento</button>
                                     </div>
 
                 </div><hr>
@@ -203,7 +203,7 @@ if (isset($_POST['from']))
                 };
 
 
-                // id del where the calendar will be shown
+                // id where the calendar will be shown
                 var calendar = $('#calendar').calendar(options); 
 
                 $('.btn-group button[data-calendar-nav]').each(function()
