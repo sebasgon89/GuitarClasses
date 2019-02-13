@@ -36,7 +36,8 @@ if (isset($_POST['from']))
         $clase  = evaluate($_POST['class']);
 
         // class started
-        $query="INSERT INTO classes VALUES(null,'$title','$body','','$clase','$beggining','$final','$beggining_normal','$final_normal')";
+        //$query="INSERT INTO classes VALUES(null,'$title','$body','','$clase','$beggining','$final','$beggining_normal','$final_normal')";
+        $query="INSERT INTO eventos VALUES(null,'$titulo','$body','','$clase','$inicio','$final','$inicio_normal','$final_normal')";
 
         // run sql query
         $conn->query($query); 
