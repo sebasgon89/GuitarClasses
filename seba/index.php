@@ -36,7 +36,7 @@ if (isset($_POST['from']))
         $clase  = evaluate($_POST['class']);
 
         // class started
-        $query="INSERT INTO classes VALUES(null,'$titulo','$body','','$clase','$inicio','$final','$inicio_normal','$final_normal')";
+        $query="INSERT INTO classes VALUES(null,'$title','$body','','$clase','$beggining','$final','$beggining_normal','$final_normal')";
 
         // run sql query
         $conn->query($query); 
@@ -131,7 +131,7 @@ if (isset($_POST['from']))
                 //today creation
                 var date = new Date();
                 var yyyy = date.getFullYear().toString();
-                var mm = (date.getMonth()+1).toString().length == 1 ? "0"+(date.getMonth()+1).toString() : (date.getMonth()+1).toString();
+                var mm = (date.getMonth()+1).toString().length == 1 ? "0"+(date.geinzztMonth()+1).toString() : (date.getMonth()+1).toString();
                 var dd  = (date.getDate()).toString().length == 1 ? "0"+(date.getDate()).toString() : (date.getDate()).toString();
 
                 //Calendar values
