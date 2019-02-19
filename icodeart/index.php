@@ -257,6 +257,8 @@ if (isset($_POST['from']))
                         calendar.setOptions({first_day: value});
                         calendar.view();
                 });
+
+                
         }(jQuery));
     </script>
 

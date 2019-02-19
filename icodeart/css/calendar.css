@@ -116,7 +116,7 @@
 }
 .cal-row-head [class*="cal-cell"]:first-child,
 .cal-row-head [class*="cal-cell"] {
-  min-height: auto;
+  min-height: 10pxs;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -399,7 +399,7 @@
 }
 .cal-year-box [class*="span"],
 .cal-month-box [class*="cal-cell"] {
-  min-height: 100px;
+  min-height: 10px;
   border-right: 1px solid #e1e1e1;
   position: relative;
 }
@@ -508,3 +508,4 @@ a.cal-event-week {
 .badge-important {
   background-color: #b94a48;
 }
+

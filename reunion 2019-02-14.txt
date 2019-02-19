@@ -1,0 +1,21 @@
+1) Tiempos
+- ¿Cuándo se necesita?
+
+2) Usuarios. ¿Quién los crea?
+
+3) Front del calendario. ¿Estilo el de la página?
+- Para el docente ver si está libre, reservado y pago. Tiene que ver quién tiene las clases. 
+
+4) Horarios. ¿Hora inicio/fin?
+
+5) DB
+- Alumno
+- mail
+- tel
+- tipo
+- Día/Hora (inicio)
+
+
+El alumno pone su nombre, mail, tel y dps Pablo lo crea en la base cuando lo confirma
+
+El plugin de Wordpress que tiene: Bookcommerce bookings
