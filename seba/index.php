@@ -1,60 +1,85 @@
 <?php
 
-// Timezone
-date_default_timezone_set("America/Argentina/Buenos_Aires");
+/**
+**
+**  BY iCODEART
+**
+**********************************************************************
+**                      REDES SOCIALES                            ****
+**********************************************************************
+**                                                                ****
+** FACEBOOK: https://www.facebook.com/icodeart                    ****
+** TWIITER: https://twitter.com/icodeart                          ****
+** YOUTUBE: https://www.youtube.com/c/icodeartdeveloper           ****
+** GITHUB: https://github.com/icodeart                            ****
+** TELEGRAM: https://telegram.me/icodeart                         ****
+** EMAIL: info@icodeart.com                                       ****
+**                                                                ****
+**********************************************************************
+**********************************************************************
+**/
 
-// functions file
+// Definimos nuestra zona horaria
+date_default_timezone_set("America/Santiago");
+
+// incluimos el archivo de funciones
 include 'functions.php';
 
-// config file
+// incluimos el archivo de configuracion
 include 'config.php';
 
-// Verifying from field
+// Verificamos si se ha enviado el campo con name from
 if (isset($_POST['from'])) 
 {
 
-    // ... if so, we verify that it is not empty
+    // Si se ha enviado verificamos que no vengan vacios
     if ($_POST['from']!="" AND $_POST['to']!="") 
     {
 
-        // start and and are received from the form
+        // Recibimos el fecha de inicio y la fecha final desde el form
 
-        $beggining = _giveFormat($_POST['from']);
+        $inicio = _formatear($_POST['from']);
+        // y la formateamos con la funcion _formatear
 
-        $final  = _giveFormat($_POST['to']);
+        $final  = _formatear($_POST['to']);
 
         // Recibimos el fecha de inicio y la fecha final desde el form
 
-        $beggining_normal = $_POST['from'];
+        $inicio_normal = $_POST['from'];
 
-        // and "formatted" with the function
+        // y la formateamos con la funcion _formatear
         $final_normal  = $_POST['to'];
 
-        // other fields from the form with the evaluate function to remove not allowed chars
-        $title = evaluate($_POST['title']);
-        $body   = evaluate($_POST['event']);
-        $clase  = evaluate($_POST['class']);
+        // Recibimos los demas datos desde el form
+        $titulo = evaluar($_POST['title']);
 
-        // class started
-        //$query="INSERT INTO classes VALUES(null,'$title','$body','','$clase','$beggining','$final','$beggining_normal','$final_normal')";
+        // y con la funcion evaluar
+        $body   = evaluar($_POST['event']);
+
+        // reemplazamos los caracteres no permitidos
+        $clase  = evaluar($_POST['class']);
+
+        // insertamos el evento
         $query="INSERT INTO eventos VALUES(null,'$titulo','$body','','$clase','$inicio','$final','$inicio_normal','$final_normal')";
 
-        // run sql query
-        $conn->query($query); 
+        // Ejecutamos nuestra sentencia sql
+        $conexion->query($query); 
 
-        // id of the last inserted element
-        $im=$conn->query("SELECT MAX(id) AS id FROM classes");
+        // Obtenemos el ultimo id insetado
+        $im=$conexion->query("SELECT MAX(id) AS id FROM eventos");
         $row = $im->fetch_row();  
         $id = trim($row[0]);
 
-        // to generate the link and update it into the DB
-        $link = "$base_url"."class_description.php?id=$id";
-        $query="UPDATE classes SET url = '$link' WHERE id = $id";
+        // para generar el link del evento
+        $link = "$base_url"."descripcion_evento.php?id=$id";
 
-        // sql run
-        $conn->query($query); 
+        // y actualizamos su link
+        $query="UPDATE eventos SET url = '$link' WHERE id = $id";
 
-        // back to index
+        // Ejecutamos nuestra sentencia sql
+        $conexion->query($query); 
+
+        // redireccionamos a nuestro calendario
         header("Location:$base_url"); 
     }
 }
@@ -100,17 +125,17 @@ if (isset($_POST['from']))
 
                                 </div>
                                     <div class="pull-right form-inline"><br>
-                                        <button class="btn btn-info" data-toggle='modal' data-target='#add_class'>Añadir Evento</button>
+                                        <button class="btn btn-info" data-toggle='modal' data-target='#add_evento'>Añadir Evento</button>
                                     </div>
 
                 </div><hr>
 
                 <div class="row">
-                        <div id="calendar"></div> <!-- calendar -->
+                        <div id="calendar"></div> <!-- Aqui se mostrara nuestro calendario -->
                         <br><br>
                 </div>
 
-                <!--modal window-->
+                <!--ventana modal para el calendario-->
                 <div class="modal fade" id="events-modal">
                     <div class="modal-dialog">
                             <div class="modal-content">
@@ -118,7 +143,7 @@ if (isset($_POST['from']))
                                         <p>One fine body&hellip;</p>
                                     </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 </div>
                             </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
@@ -129,61 +154,61 @@ if (isset($_POST['from']))
     <script src="<?=$base_url?>js/calendar.js"></script>
     <script type="text/javascript">
         (function($){
-                //today creation
+                //creamos la fecha actual
                 var date = new Date();
                 var yyyy = date.getFullYear().toString();
-                var mm = (date.getMonth()+1).toString().length == 1 ? "0"+(date.geinzztMonth()+1).toString() : (date.getMonth()+1).toString();
+                var mm = (date.getMonth()+1).toString().length == 1 ? "0"+(date.getMonth()+1).toString() : (date.getMonth()+1).toString();
                 var dd  = (date.getDate()).toString().length == 1 ? "0"+(date.getDate()).toString() : (date.getDate()).toString();
 
-                //Calendar values
+                //establecemos los valores del calendario
                 var options = {
 
-                    // set up modal use for windoe
+                    // definimos que los eventos se mostraran en ventana modal
                         modal: '#events-modal', 
 
-                        // inside of an iframe
+                        // dentro de un iframe
                         modal_type:'iframe',    
 
-                        //classes from db
-                        events_source: '<?=$base_url?>get_classes.php', 
+                        //obtenemos los eventos de la base de datos
+                        events_source: '<?=$base_url?>obtener_eventos.php', 
 
-                        // calendar set as month by default
+                        // mostramos el calendario en el mes
                         view: 'month',             
 
-                        // and today
+                        // y dia actual
                         day: yyyy+"-"+mm+"-"+dd,   
 
 
-                        // default language
+                        // definimos el idioma por defecto
                         language: 'es-ES', 
 
-                        //calendar temmplate
+                        //Template de nuestro calendario
                         tmpl_path: '<?=$base_url?>tmpls/', 
                         tmpl_cache: false,
 
 
-                        // Time start
+                        // Hora de inicio
                         time_start: '08:00', 
 
-                        // Time end
+                        // y Hora final de cada dia
                         time_end: '22:00',   
 
-                        // Time split
+                        // intervalo de tiempo entre las hora, en este caso son 30 minutos
                         time_split: '30',    
 
-                        // calendar width
+                        // Definimos un ancho del 100% a nuestro calendario
                         width: '100%', 
 
-                        onAfterEventsLoad: function(classes)
+                        onAfterEventsLoad: function(events)
                         {
-                                if(!classes)
+                                if(!events)
                                 {
                                         return;
                                 }
-                                var list = $('#classlist');
+                                var list = $('#eventlist');
                                 list.html('');
 
-                                $.each(classes, function(key, val)
+                                $.each(events, function(key, val)
                                 {
                                         $(document.createElement('li'))
                                                 .html('<a href="' + val.url + '">' + val.title + '</a>')
@@ -204,7 +229,7 @@ if (isset($_POST['from']))
                 };
 
 
-                // id where the calendar will be shown
+                // id del div donde se mostrara el calendario
                 var calendar = $('#calendar').calendar(options); 
 
                 $('.btn-group button[data-calendar-nav]').each(function()
@@ -232,10 +257,12 @@ if (isset($_POST['from']))
                         calendar.setOptions({first_day: value});
                         calendar.view();
                 });
+
+                
         }(jQuery));
     </script>
 
-<div class="modal fade" id="add_class" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+<div class="modal fade" id="add_evento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -261,11 +288,11 @@ if (isset($_POST['from']))
 
                     <label for="tipo">Tipo de evento</label>
                     <select class="form-control" name="class" id="tipo">
-                        <option value="class-info">Informacion</option>
-                        <option value="class-success">Exito</option>
-                        <option value="class-important">Importantante</option>
-                        <option value="class-warning">Advertencia</option>
-                        <option value="class-special">Especial</option>
+                        <option value="event-info">Informacion</option>
+                        <option value="event-success">Exito</option>
+                        <option value="event-important">Importantante</option>
+                        <option value="event-warning">Advertencia</option>
+                        <option value="event-special">Especial</option>
                     </select>
 
                     <br>
@@ -278,7 +305,7 @@ if (isset($_POST['from']))
 
 
                     <label for="body">Evento</label>
-                    <textarea id="body" name="class" required class="form-control" rows="3"></textarea>
+                    <textarea id="body" name="event" required class="form-control" rows="3"></textarea>
 
     <script type="text/javascript">
         $(function () {
