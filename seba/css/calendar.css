@@ -392,7 +392,7 @@
   background-color: #fafafa;
 }
 .cal-month-day {
-  height: 10px;
+  height: 10%;
 }
 [class*="cal-cell"]:hover {
   background-color: #ededed;
