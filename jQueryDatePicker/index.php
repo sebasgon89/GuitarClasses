@@ -12,6 +12,22 @@
   $(document).ready(function() {
     $("#datepicker").datepicker();
   });
+  $(function() {
+   
+   $("#datepicker").datepicker({
+     onSelect: function(dateText) {
+       display("Selected date: " + dateText + ", Current Selected Value= " + this.value);
+       $(this).change();
+     }
+   }).on("change", function() {
+     display($(this).val());
+   });
+ 
+   function display(msg) {
+     $("<p>").html(msg).appendTo(document.body);
+   }
+   });
+
   </script>
 </head>
 <body>
