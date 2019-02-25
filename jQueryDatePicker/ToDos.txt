@@ -18,3 +18,4 @@ Que se note si está paga o no la clase
 ---
 Otras funciones
 Mensajes
+Armar la db! 
