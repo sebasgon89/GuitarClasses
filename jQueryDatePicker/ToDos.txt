@@ -1,0 +1,10 @@
+Usar el datePicker de jQuery. 
+Usar radios para la hora. 
+Juntar las dos cosas en un bootstrap. 
+Guardar las elecciones en una DB. 
+Cambiar los formatos de los horarios. 
+Dar opción de reservar --> pedir nombre, mail, tel. 
+Cant de clases --> mismo día de la semana??
+
+---
+Vista de schaabp
