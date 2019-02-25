@@ -11,7 +11,7 @@ Cant de clases --> mismo día de la semana??
 Vista de schaabp: 
 Log in
 Revisar todos los pedidos de clase
---> link a "Aprove"
+--> link a "Approve"
 ----> datos que se agregan a la db
 Capacidad de editar los usuarios de la DB
 Que se note si está paga o no la clase
