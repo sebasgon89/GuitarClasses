@@ -12,7 +12,10 @@
   $(document).ready(function() {
     $('#boton').click(function(e){
          //e.preventDefaul<t();
-         $("#boton").after("<br><input type='radio'value='Appended item' class='boton'></input>");
+         //$("#boton").after("<br><input type='radio'value='Appended item' class='boton'></input>");
+         $opt1 = "<br><input name='hour' type='radio'value='1400' class='boton'>14:00</input>";
+         $opt2 = "<br><input name='hour' type='radio'value='1500' class='boton'>15:00</input>";
+         $("#boton").after($opt1,$opt2);
      });
   });
 
